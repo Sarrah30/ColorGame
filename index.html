@@ -4,23 +4,65 @@
   <head>
     <title>Color Game</title>
     <link rel="stylesheet" href="./index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+    
   </head>
   <body onload="newGame()">
     <div id="header">
-      <h2>The Great</h2>
+      <h2>The Color Guessing Game</h2>
       <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
-      <h2>Guessing Game</h2>
+      <h2>Click the tile with the correct color!</h2>
+      <h3 id="count"> Number of Tries:0</h3>
+      <button id="button" onClick="window.location.reload();">New Game</button>
     </div>
+
+    <div id="timerline">
+      <progress value="0" max="30" id="progressBar"></progress>
+      <div class="timer" id="countdown"></div>
+      <div class="sentence" id="result"></div>
+    </div>
+    
     <div id="container">
       <div class="tile" id="1"></div>
       <div class="tile" id="2"></div>
+      <div class="tile" id="3"></div>
+      <div class="tile" id="4"></div>
+      <div class="tile" id="5"></div>
+      <div class="tile" id="6"></div>
     </div>
+    
 
     <script>
       var t1 = document.getElementById("1");
       var t2 = document.getElementById("2");
+      var t3 = document.getElementById("3");
+      var t4 = document.getElementById("4");
+      var t5 = document.getElementById("5");
+      var t6 = document.getElementById("6");
       var x;
       var correctColor;
+      var counts=1;
+
+      var timeleft = 0;
+      var downloadTimer = setInterval(function(){
+        if(timeleft < 0){
+          clearInterval(downloadTimer);
+          window.confirm("Game Over. Please start new game");
+        }
+        document.getElementById("progressBar").value = 30 - timeleft;
+        timeleft += 1;
+      }, 1000);
+
+      var timeleft2 = 30;
+      var downloadTimer2 = setInterval(function(){
+        if(timeleft2 <= 0){
+          clearInterval(downloadTimer2);
+          document.getElementById("countdown").innerHTML = "GAME OVER";
+        } else {
+          document.getElementById("countdown").innerHTML = "Time Left: "+ timeleft2 + " seconds" ;
+        }
+        timeleft2 -= 1;
+      }, 1000);
 
       function getRandomColor() {
         var letters = "0123456789ABCDEF";
@@ -34,11 +76,19 @@
       function newGame() {
         t1.style.background = getRandomColor();
         t2.style.background = getRandomColor();
+        t3.style.background = getRandomColor();
+        t4.style.background = getRandomColor();
+        t5.style.background = getRandomColor();
+        t6.style.background = getRandomColor();
 
-        x = Math.floor(Math.random() * 2 + 1);
+        x = Math.floor(Math.random() * 6 );
 
-        if (x == 1) correctColor = t1.style.background;
-        else correctColor = t2.style.background;
+        if (x == 0) correctColor = t1.style.background;
+        else if (x==1) correctColor = t2.style.background;
+        else if (x==2) correctColor = t3.style.background;
+        else if (x==3) correctColor = t4.style.background;
+        else if (x==4) correctColor = t5.style.background;
+        else correctColor = t6.style.background;
         /* console.log(x);
         console.log(correctColor); */
 
@@ -48,20 +98,105 @@
       t1.addEventListener("click", function () {
         if (t1.style.background == correctColor) {
           t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
           document.getElementById("header").style.background = correctColor;
+          clearInterval(downloadTimer);
+          clearInterval(downloadTimer2);
+          document.getElementById("result").innerHTML = "We have a winner!!";
         } else {
           t1.style.background = "black";
         }
+        document.getElementById("count").innerHTML= "Number of Tries: "+ counts++;
       });
 
       t2.addEventListener("click", function () {
         if (t2.style.background == correctColor) {
           t1.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
           document.getElementById("header").style.background = correctColor;
+          clearInterval(downloadTimer);
+          clearInterval(downloadTimer2);
+          document.getElementById("result").innerHTML = "We have a winner!!";
         } else {
           t2.style.background = "black";
         }
+        document.getElementById("count").innerHTML= "Number of Tries: "+ counts++;
       });
+
+      t3.addEventListener("click", function () {
+        if (t3.style.background == correctColor) {
+          t2.style.background = correctColor;
+          t1.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          clearInterval(downloadTimer);
+          clearInterval(downloadTimer2);
+          document.getElementById("result").innerHTML = "Looks like you know your colors!";
+        } else {
+          t3.style.background = "black";
+        }
+        document.getElementById("count").innerHTML= "Number of Tries: "+ counts++;
+      });
+
+      t4.addEventListener("click", function () {
+        if (t4.style.background == correctColor) {
+          t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t1.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          clearInterval(downloadTimer);
+          clearInterval(downloadTimer2);
+          document.getElementById("result").innerHTML = "Albert Einstein called....He wants his brain back.";
+        } else {
+          t4.style.background = "black";
+        }
+        document.getElementById("count").innerHTML= "Number of Tries: "+ counts++;
+      });
+
+      t5.addEventListener("click", function () {
+        if (t5.style.background == correctColor) {
+          t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t1.style.background = correctColor;
+          t6.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          clearInterval(downloadTimer);
+          clearInterval(downloadTimer2);
+          document.getElementById("result").innerHTML = "Albert Einstein called....He wants his brain back.";
+        } else {
+          t5.style.background = "black";
+        }
+        document.getElementById("count").innerHTML= "Number of Tries: "+ counts++;
+      });
+
+      t6.addEventListener("click", function () {
+        if (t6.style.background == correctColor) {
+          t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t1.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          clearInterval(downloadTimer);
+          clearInterval(downloadTimer2);
+          document.getElementById("result").innerHTML = "Albert Einstein called....He wants his brain back.";
+        } else {
+          t6.style.background = "black";
+        }
+        document.getElementById("count").innerHTML= "Number of Tries: "+ counts++;
+      });
+      
     </script>
   </body>
 </html>

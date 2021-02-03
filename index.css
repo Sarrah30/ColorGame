@@ -4,7 +4,8 @@
 }
 
 #header {
-  background-color: lightpink;
+  background-color: #3CBD99;
+  background-image: url("bush.png");
   height: 30vh;
   display: flex;
   flex-direction: column;
@@ -12,16 +13,72 @@
   align-items: center;
 }
 
+#timerline{
+  text-align: center;
+}
+.timer{
+  text-align: center;
+  color:tomato;
+  font-family: 'Special Elite', cursive;
+}
+
+.progressBar{
+  text-align: center;
+}
+.progress{
+  background-color: blue;
+}
+.progress-bar{
+  background-color:green;
+}
+.sentence{
+  text-align:center;
+  color: blue;
+  font-family: 'Cinzel', serif;
+}
+h1{
+  font-family: 'Cinzel', serif;
+}
+h2{
+  font-family: 'Special Elite', cursive;
+}
+
+h3{
+  div::before{ content:"Number of Tries: "}
+}
+
 #container {
   background-color: black;
   height: 70vh;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
 }
 
 .tile {
-  height: 200px;
-  width: 200px;
-  background-color: aliceblue;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-self: center;
+  background-color: white;
+}
+.tile:hover{
+  border-radius: 50px;
+  border-color: white;
+}
+
+button{
+  background-color:#006598;
+  color:white;
+  font-family: 'Great Vibes', cursive;
+  font-size:x-large;
+}
+
+
+button:hover{
+  background-color: coral;
+  border-radius: 20px;
 }
